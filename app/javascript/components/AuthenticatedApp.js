@@ -9,7 +9,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      apartments:  [],  // We start with an empty array, so the component can finish rendering before we make our fetch request
+      apartments: [],  // We start with an empty array, so the component can finish rendering before we make our fetch request
     }
     this.getApartments() // Calls our fetch method when the component loads for the first time
   }
