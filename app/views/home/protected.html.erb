@@ -1,0 +1,6 @@
+<h2>Zillow Clone</h2>
+<%= react_component("AuthenticatedApp", {
+      logged_in: user_signed_in?,
+      sign_in_route: new_user_session_path,
+      sign_out_route: destroy_user_session_path,
+    }) %>
