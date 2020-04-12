@@ -27,16 +27,11 @@ class ApartmentsController < ApplicationController
   # POST /apartments
   # POST /apartments.json
   def create
-    @apartment = Apartment.new(apartment_params)
-
-    respond_to do |format|
-      if @apartment.save
-        format.html { redirect_to @apartment, notice: "Apartment was successfully created." }
-        format.json { render :show, status: :created, location: @apartment }
-      else
-        format.html { render :new }
-        format.json { render json: @apartment.errors, status: :unprocessable_entity }
-      end
+    @apartment = current_user.apartments.create(apartment_params)
+    if @apartment.valid?
+      render json: @apartment
+    else
+      render json: @apartment.errors, status: :unprocessable_entity
     end
   end
 
@@ -73,6 +68,6 @@ class ApartmentsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def apartment_params
-    params.require(:apartment).permit(:name, :street, :street2, :city, :state, :country, :zip_code, :user_id)
+    params.require(:apartment).permit(:name, :street, :street2, :city, :state, :zip_code, :user_id)
   end
 end

@@ -35,12 +35,13 @@ class App extends Component {
         //Finally, we can assign the cats to state, and they will render
         console.log("is this array?", typeof apartmentArray)
         this.setState({
-          apartments: [apartmentArray]
+          apartments: apartmentArray.apartments
         })
       })
   }
 
   handleCreateApartment = (newapartment) => {
+    console.log("Here is the new apartment", newapartment)
     return fetch("http://127.0.0.1:3000/apartments", {
       // converting an object to a string
     	body: JSON.stringify(newapartment),
@@ -52,7 +53,7 @@ class App extends Component {
     	method: "POST"
     })
     .then((response) => {
-      // if the response is good call the getCats method
+      // if the response is good call the getApartments method
       if(response.ok){
         return this.getApartments()
       }
