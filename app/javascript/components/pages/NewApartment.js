@@ -8,41 +8,32 @@ constructor(props){
   super(props)
   this.state = {
     success: false,
-    apartmentAttributes: {
+    form: {
       name: '', 
       street: '',
       street2: '',
       city: '',
       zip_code: '',
-      state: '',
+      state: ''
     }
   }
 }
 
 
-  handleSubmit = (event)=>{
+  handleChange = (event) => {
+        let { form } = this.state
+        form[event.target.name] = event.target.value
+        this.setState({ form: form })
+      }
+
+  handleSubmit = (event) => {
     event.preventDefault()
-    fetch('/apartments.json', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({apartment:this.state.apartmentAttributes})
-    })
-    .then((response)=>{
-      this.setState({success: true})
-    })
+    this.props.handleCreateApartment(this.state.form)
+    this.setState({ success: true })
   }
 
-  handleChange = (event)=>{
-    const { apartmentAttributes } = this.state
-    apartmentAttributes[event.target.name] = event.target.value
-    this.setState({ apartmentAttributes: apartmentAttributes})
-}
-
-
   render () {
-    const { apartmentAttributes, success } = this.state
+    const { form, success } = this.state
     return (
       <div>
       {success &&
@@ -60,7 +51,7 @@ constructor(props){
         <input
           type='text'
           name='name'
-          value={apartmentAttributes.name}
+          value={form.name}
           onChange={this.handleChange}
         />
         <br />
@@ -68,7 +59,7 @@ constructor(props){
         <input
           type='text'
           name='street'
-          value={apartmentAttributes.street}
+          value={form.street}
           onChange={this.handleChange}
         />
         <br />
@@ -77,7 +68,7 @@ constructor(props){
         <input
           type='text'
           name='street2'
-          value={apartmentAttributes.street2}
+          value={form.street2}
           onChange={this.handleChange}
         />
         <br />
@@ -85,7 +76,7 @@ constructor(props){
         <input
           type='text'
           name='city'
-          value={apartmentAttributes.city}
+          value={form.city}
           onChange={this.handleChange}
         />
         <br />
@@ -93,7 +84,7 @@ constructor(props){
         <input
           type='number'
           name='zip_code'
-          value={apartmentAttributes.zip_code}
+          value={form.zip_code}
           onChange={this.handleChange}
         />
         <br />
@@ -101,12 +92,12 @@ constructor(props){
         <input
           type='text'
           name='state'
-          value={apartmentAttributes.state}
+          value={form.state}
           onChange={this.handleChange}
         />
         <br />
 
-        <button type="submit">Add</button>
+        <button type="submit" onClick={this.handleSubmit}>Add</button>
 
         </form>
         </div>

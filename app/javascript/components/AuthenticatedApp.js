@@ -80,13 +80,7 @@ class App extends Component {
           </NavItem>
           <NavItem>
             <NavLink to="/newapartment" tag={ Link }>Create a Listing</NavLink>
-          </NavItem>
-        <Link to = "/newapartment">
-            <Button className="button"> Add a Listing! </Button> 
-        </Link>
-        <Link to = "/apartmentindex" >
-            <Button className="button"> All Apartment </Button> 
-        </Link> 
+          </NavItem> 
           <br/>
         <Switch >
             <Route exact path = "/newapartment" render = { props => <NewApartment handleCreateApartment= { this.handleCreateApartment }/>}/> 

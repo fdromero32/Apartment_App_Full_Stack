@@ -16,7 +16,6 @@ class AllApartments extends React.Component {
                 <th>State</th>
               </tr>
               {console.log("This is the props", this.props.apartments)}
-              {/* TODO: review props & copied examples.  */}
               {this.props.apartments.map((apartment, index) => {
                 return(
               <tr key={index}>
